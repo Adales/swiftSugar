@@ -3,6 +3,7 @@ import Foundation
 
 
 extension Date {
+    //iso definition of date format isn't precise - there are few valid ways
     private enum IsoFormat : String {
         
         case full = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
@@ -11,7 +12,7 @@ extension Date {
         
         func formatter() -> DateFormatter {
             let formatter = DateFormatter()
-            formatter.timeZone = TimeZone(secondsFromGMT: 0)
+            formatter.timeZone = TimeZone(secondsFromGMT: 0) //
             formatter.dateFormat = rawValue
             return formatter
         }
@@ -20,7 +21,6 @@ extension Date {
     
     public func iso8061string() -> String {
         let formatter = IsoFormat.noZone.formatter()
-        formatter.timeZone = TimeZone(secondsFromGMT: 0) //backend doesn't look at TimeZones
         return formatter.string(from: (self))
     }
     
